@@ -55,7 +55,9 @@ set showmode                                               " Show the mode the e
 set showmatch                                              " Show matching brackets.
 set incsearch                                              " Incremental search
 set clipboard=unnamed                                      " Use a global clipboard
-set listchars=eol:¬,space:·,extends:>,precedes:<,tab:>\    " Define special characters
+scriptencoding utf-8
+set encoding=utf-8
+set listchars=eol:$,tab:>_                                 " Define special characters
 set list                                                   " Mark special characters
 set formatoptions-=r                                       " Don't add comment after hitting <Enter>
 set formatoptions-=o                                       " Don't add comment after hitting 'o'
@@ -84,6 +86,7 @@ set splitright
 
 " Color scheme settings {{{
 syntax on
+set t_Co=256
 colorscheme tir_black
 " }}}
 
@@ -175,3 +178,5 @@ let g:netrw_ignorenetrc = 1
 " }}}
 
 autocmd BufWritePre * %s/\s\+$//e
+
+
