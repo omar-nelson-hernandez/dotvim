@@ -1,3 +1,3 @@
-autocmd BufRead,BufNewFile *.pck set filetype=sql
-autocmd BufRead,BufNewFile *.typ set filetype=sql
-autocmd BufRead,BufNewFile *.sql set filetype=sql
+autocmd BufRead,BufNewFile *.pck set filetype=plsql
+autocmd BufRead,BufNewFile *.typ set filetype=plsql
+autocmd BufRead,BufNewFile *.sql set filetype=plsql
