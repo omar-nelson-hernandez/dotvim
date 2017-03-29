@@ -14,7 +14,9 @@ let colors_name = "tir_black"
 
 " General colors
 hi Normal guifg=#f6f3e8 guibg=black ctermfg=white ctermbg=0
-hi NonText guifg=#070707 guibg=black ctermfg=232 ctermbg=0
+" Highlights for listchars
+hi NonText guifg=#1C1C1C guibg=black ctermfg=232 ctermbg=0
+hi SpecialKey guifg=#7C7C7C guibg=black ctermfg=white ctermbg=0
 
 hi Cursor guifg=black guibg=white ctermfg=0 ctermbg=15
 hi LineNr guifg=#3D3D3D guibg=black ctermfg=239 ctermbg=0
@@ -27,8 +29,6 @@ hi Folded guifg=#a0a8b0 guibg=#384048 ctermfg=103 ctermbg=60
 hi Title guifg=#f6f3e8 gui=bold ctermfg=187 cterm=bold
 hi Visual guibg=#262D51 ctermbg=60
 
-"hi SpecialKey guifg=#808080 guibg=#343434 ctermfg=8 ctermbg=236
-hi SpecialKey guifg=#7C7C7C guibg=#000000 ctermfg=white ctermbg=0
 
 hi WildMenu guifg=black guibg=#cae682 ctermfg=0 ctermbg=195
 hi PmenuSbar guifg=black guibg=white ctermfg=0 ctermbg=15
