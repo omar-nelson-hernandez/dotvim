@@ -25,15 +25,6 @@ execute pathogen#infect()
 execute pathogen#helptags()
 filetype indent plugin on                                  " Enable automatic indentation, plugins and filetype detection
 let mapleader=","                                          " Change the map leader, \ is very hard to press
-
-" Remove unnecessary toolbars (why do they exist anyway?)
-if has('gui_running')
-  set guioptions-=T                                        " Disable tool bar
-  set guioptions-=m                                        " Disable menu bar
-endif
-
-set guifont=Consolas:h11:cANSI:qDRAFT                      " Set my preferred font
-au GUIEnter * simalt ~x                                    " Start GVim maximized
 set wildmenu                                               " Command line completition
 set foldmethod=marker                                      " Fold on markers
 set showcmd                                                " Show commands on the last line of the screen
@@ -55,9 +46,9 @@ set showmode                                               " Show the mode the e
 set showmatch                                              " Show matching brackets.
 set incsearch                                              " Incremental search
 set clipboard=unnamed                                      " Use a global clipboard
-scriptencoding utf-8
 set encoding=utf-8
-set listchars=eol:$,tab:>_                                 " Define special characters
+scriptencoding utf-8
+set listchars=eol:$,trail:•,nbsp:~,tab:\|\                 " Define special characters
 set list                                                   " Mark special characters
 set formatoptions-=r                                       " Don't add comment after hitting <Enter>
 set formatoptions-=o                                       " Don't add comment after hitting 'o'
@@ -75,6 +66,7 @@ set formatoptions-=c                                       " Do not autowrap com
 " Indentation options {{{
 set shiftwidth=2                                           " Size of tab
 set softtabstop=2                                          " Size of tab
+set tabstop=2                                              " Size of tabs
 set expandtab                                              " Tabs expanded to spaces
 set smartindent                                            " Smart indent enabled
 " }}}
@@ -89,6 +81,25 @@ syntax on
 set t_Co=256
 colorscheme tir_black
 " }}}
+
+" Setup directories for backup, swap and undo {{{
+if has("win32")
+  silent !mkdir \%HOME\%\.vimbackups
+  silent !mkdir \%HOME\%\.vimswap
+  silent !mkdir \%HOME\%\.vimundo
+
+  set backupdir=~\\.vimbackups//,.
+  set undodir=~\\.vimswap//,.
+  set directory=~\\.vimundo//,.
+
+  set backup
+  set undofile
+  set swapfile
+else
+  if has("unix")
+  endif
+endif
+"}}}
 
 " Mappings {{{
 
@@ -150,7 +161,7 @@ nnoremap <C-x> I#<ESC>79a-<ESC>a<CR># <CR><ESC>I#<ESC>79a-<ESC>k
 let g:indent_guides_enable_on_vim_startup = 1
 
 "" Exclude filetypes from indent guides
-let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'vim']
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'vim', 'plsql']
 
 "" Enable the <leader>ig mapping
 "let g:indent_guides_default_mapping = 0
@@ -177,6 +188,11 @@ let g:netrw_winsize = 20
 let g:netrw_ignorenetrc = 1
 " }}}
 
-autocmd BufWritePre * %s/\s\+$//e
+" CtrlP plugin settings {{{
+let g:ctrlp_clear_cache_on_exit = 0                        " Don't allow the cache to be cleared when the sessions exits
+let g:ctrlp_show_hidden = 1                                " Scan for hidden files/folders
+" }}}
 
-
+" Cannot use automatic removal of trailing spaces in the office because it
+" will mess up existing sources
+"autocmd BufWritePre * %s/\s\+$//e
