@@ -89,16 +89,23 @@ if has("win32")
   silent !mkdir \%HOME\%\.vimundo
 
   set backupdir=~\\.vimbackups//,.
-  set undodir=~\\.vimswap//,.
-  set directory=~\\.vimundo//,.
-
-  set backup
-  set undofile
-  set swapfile
+  set undodir=~\\.vimundo//,.
+  set directory=~\\.vimswap//,.
 else
   if has("unix")
+    silent !mkdir ~//.vimbackups 2> /dev/null
+    silent !mkdir ~//.vimswap 2> /dev/null
+    silent !mkdir ~//.vimundo 2> /dev/null
+
+    set backupdir=~//.vimbackups//,.
+    set undodir=~//.vimundo//,.
+    set directory=~//.vimswap//,.
   endif
 endif
+
+set backup
+set undofile
+set swapfile
 "}}}
 
 " Mappings {{{
