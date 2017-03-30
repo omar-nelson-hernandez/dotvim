@@ -54,6 +54,7 @@ set formatoptions-=r                                       " Don't add comment a
 set formatoptions-=o                                       " Don't add comment after hitting 'o'
 set viewoptions=folds,options,cursor,unix,slash            " Better Unix / Windows compatibility
 set history=1000                                           " Store a ton of history (default is 20)
+set shellslash                                             " Replaces all back slashes with forward slashes
 " }}}
 
 " Wrapping options {{{
@@ -83,20 +84,27 @@ colorscheme tir_black
 " }}}
 
 " Setup directories for backup, swap and undo {{{
-if has("win32")
-  silent !mkdir \%HOME\%\.vimbackups
-  silent !mkdir \%HOME\%\.vimswap
-  silent !mkdir \%HOME\%\.vimundo
+function! EnsureDirExists( dir )
+  if !isdirectory( a:dir )
+    if exists( "*mkdir" )
+      call mkdir( a:dir, 'p' )
+      echo "Created directory: " . a:dir
+    else
+      echo "Please create directory: " . a:dir
+    endif
+  endif
+endfunction
 
+call EnsureDirExists( $HOME . '/.vimbackups' )
+call EnsureDirExists( $HOME . '/.vimswap' )
+call EnsureDirExists( $HOME . '/.vimundo' )
+
+if has("win32")
   set backupdir=~\\.vimbackups//,.
   set undodir=~\\.vimundo//,.
   set directory=~\\.vimswap//,.
 else
   if has("unix")
-    silent !mkdir ~//.vimbackups 2> /dev/null
-    silent !mkdir ~//.vimswap 2> /dev/null
-    silent !mkdir ~//.vimundo 2> /dev/null
-
     set backupdir=~//.vimbackups//,.
     set undodir=~//.vimundo//,.
     set directory=~//.vimswap//,.
@@ -119,6 +127,8 @@ nmap <S-F2> '[
 nmap <C-F2> m.
 " Use <F3> to toggle between 'paste' and 'nopaste'
 nnoremap <F3> :set invpaste paste?<CR>
+" Obtain the name of the current file
+nnoremap <F4> :let @* = expand("%:p")<CR>
 map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 " Toggle indent guides
 nnoremap <F12> <Plug>IndentGuidesToggle
@@ -203,3 +213,9 @@ let g:ctrlp_show_hidden = 1                                " Scan for hidden fil
 " Cannot use automatic removal of trailing spaces in the office because it
 " will mess up existing sources
 "autocmd BufWritePre * %s/\s\+$//e
+
+" Text templates {{{
+command! InsCodixHeader :read ~/.vim/text-templates/codix-header.txt
+command! InsCodixFooter :normal i$Log: $<ESC>
+command! InsKshHeader :normal i#!/usr/bin/env ksh<CR><ESC>
+" }}}
