@@ -208,6 +208,12 @@ let g:netrw_ignorenetrc = 1
 " CtrlP plugin settings {{{
 let g:ctrlp_clear_cache_on_exit = 0                        " Don't allow the cache to be cleared when the sessions exits
 let g:ctrlp_show_hidden = 1                                " Scan for hidden files/folders
+" Modify scanning rules
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|doc)$',
+  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+  \ }
 " }}}
 
 " Cannot use automatic removal of trailing spaces in the office because it
@@ -219,3 +225,4 @@ command! InsCodixHeader :read ~/.vim/text-templates/codix-header.txt
 command! InsCodixFooter :normal i$Log: $<ESC>
 command! InsKshHeader :normal i#!/usr/bin/env ksh<CR><ESC>
 " }}}
+
