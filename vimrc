@@ -226,3 +226,12 @@ command! InsCodixFooter :normal i$Log: $<ESC>
 command! InsKshHeader :normal i#!/usr/bin/env ksh<CR><ESC>
 " }}}
 
+" Autocommands {{{
+" Return to last edit position when opening files
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+" Except when the filetype is a git commit
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+" }}}
