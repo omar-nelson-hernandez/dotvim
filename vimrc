@@ -15,7 +15,8 @@
 " "
 "-------------------------------------------------------------------------------
 " To do {{{
-" Fix issue where reloading vimrc messes up the highlight color of the SignColumn
+" Fix issue where plugins overwrite the colorscheme, putting the colorscheme in after/colors doesn't work
+" because pathogen loads the plugins even after the after/ folder
 " }}}
 
 " General options {{{
@@ -48,13 +49,15 @@ set incsearch                                              " Incremental search
 set clipboard=unnamed                                      " Use a global clipboard
 set encoding=utf-8
 scriptencoding utf-8
-set listchars=eol:$,trail:•,nbsp:~,tab:\|\                 " Define special characters
+set listchars=eol:$,trail:•,nbsp:~,tab:\|>                 " Define special characters
 set list                                                   " Mark special characters
 set formatoptions-=r                                       " Don't add comment after hitting <Enter>
 set formatoptions-=o                                       " Don't add comment after hitting 'o'
 set viewoptions=folds,options,cursor,unix,slash            " Better Unix / Windows compatibility
 set history=1000                                           " Store a ton of history (default is 20)
 set shellslash                                             " Replaces all back slashes with forward slashes
+set cursorline                                             " Enable the cursor line
+set relativenumber                                         " Enable numbers relative to the current line
 " }}}
 
 " Wrapping options {{{
