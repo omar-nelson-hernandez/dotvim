@@ -3,7 +3,7 @@
 "
 " convert spaces to tabs first
 " set noexpandtab
-" set tabstop=4
+"set tabstop=4
 " set shiftwidth=4
 " retab!
 " " now you have tabs instead of spaces, so insert spaces according to
@@ -58,6 +58,7 @@ set history=1000                                           " Store a ton of hist
 set shellslash                                             " Replaces all back slashes with forward slashes
 set cursorline                                             " Enable the cursor line
 set relativenumber                                         " Enable numbers relative to the current line
+set virtualedit=block                                      " Enable block editing past line end
 " }}}
 
 " Wrapping options {{{
@@ -133,10 +134,11 @@ nnoremap <F3> :set invpaste paste?<CR>
 " Obtain the name of the current file
 nnoremap <F4> :let @* = expand("%:p")<CR>
 map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+" Beautify line, add space after comma, add space around parentheses
+nnoremap <F8> :s/(\( \<BAR>)\)\@!/( /eg<CR>:s/\( \<BAR>(\)\@<!)/ )/eg<CR>:s/,\( \)\@!/, /eg<CR>
 " Toggle indent guides
 nnoremap <F12> <Plug>IndentGuidesToggle
 " }}}
-
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
@@ -213,7 +215,7 @@ let g:ctrlp_clear_cache_on_exit = 0                        " Don't allow the cac
 let g:ctrlp_show_hidden = 1                                " Scan for hidden files/folders
 " Modify scanning rules
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn|vimbackups|vimswap|vimundo)$',
   \ 'file': '\v\.(exe|so|dll|doc)$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
@@ -237,4 +239,8 @@ autocmd BufReadPost *
      \ endif
 " Except when the filetype is a git commit
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+" }}}
+
+" NerdCommenteer settings {{{
+let g:NERDSpaceDelims = 1
 " }}}
