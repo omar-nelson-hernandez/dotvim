@@ -134,8 +134,10 @@ nnoremap <F3> :set invpaste paste?<CR>
 " Obtain the name of the current file
 nnoremap <F4> :let @* = expand("%:p")<CR>
 map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
-" Beautify line, add space after comma, add space around parentheses
-nnoremap <F8> :s/(\( \<BAR>)\)\@!/( /eg<CR>:s/\( \<BAR>(\)\@<!)/ )/eg<CR>:s/,\( \)\@!/, /eg<CR>
+" Beautify line
+nnoremap <F8> :call Beautify()<CR>
+" Convert all tabs to spaces
+nnoremap <F9> :call Tabs2Spaces()<CR>
 " Toggle indent guides
 nnoremap <F12> <Plug>IndentGuidesToggle
 " }}}
@@ -148,6 +150,39 @@ nnoremap <C-z> i/**/<ESC>h78i*<ESC>a<CR> * <CR><ESC>77a*<ESC>
 
 " Block comment (Number symbol)
 nnoremap <C-x> I#<ESC>79a-<ESC>a<CR># <CR><ESC>I#<ESC>79a-<ESC>k
+" }}}
+
+" Functions {{{
+function! Beautify()
+  " Add space after opening bracket
+  s/(\s*/( /eg
+  " Add space before closing bracket
+  s/\s*)/ )/eg
+  " Remove spaces in empty brackets
+  s/(\s*)/()/eg
+  " Fix spaces around brackets
+  "s/\s*(\s*\(.\{-}\)\s*)\s*/( \1 )/eg
+  " Fix empty brackets
+  s/(\s*)/()/eg
+  " Fix space after comma
+  s/,\s*/, /eg
+  " Fix spaces around operators
+  s,\s*\(+\|-\|*\|/\|>\|<\|=\|!\|\)=\s*, \1= ,eg
+endfunction
+function! Tabs2Spaces()
+" Convert spaces to tabs first
+  set noexpandtab
+  set tabstop=4
+  set shiftwidth=4
+  retab!
+" Now you have tabs instead of spaces, so insert spaces according to your new preference
+  set tabstop=2
+  set shiftwidth=2
+  set expandtab
+  retab!
+" Remove trailing spaces
+  s/\s\+$//e
+endfunction
 " }}}
 
 " Options for Indent guides (https://github.com/nathanaelkane/vim-indent-guides) {{{
