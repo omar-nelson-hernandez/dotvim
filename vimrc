@@ -168,6 +168,12 @@ function! Beautify()
   s/,\s*/, /eg
   " Fix spaces around operators
   s,\s*\(+\|-\|*\|/\|>\|<\|=\|!\|\)=\s*, \1= ,eg
+  " Fix space after opening square bracket
+  s/\[\s*/\[ /eg
+  " Fix space before closing square bracket
+  s/\s*\]/ \]/eg
+  " Remove spaces in empty square brackets
+  s/\[\s*\]/\[\]/eg
 endfunction
 function! Tabs2Spaces()
 " Convert spaces to tabs first
@@ -243,6 +249,8 @@ let g:netrw_browse_split = 3
 let g:netrw_winsize = 20
 " 0 use 1 ignore
 let g:netrw_ignorenetrc = 1
+" let g:netrw_scp_cmd           = 'psftp'
+let g:netrw_sftp_cmd = 'psftp'
 " }}}
 
 " CtrlP plugin settings {{{
@@ -251,7 +259,7 @@ let g:ctrlp_show_hidden = 1                                " Scan for hidden fil
 " Modify scanning rules
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|vimbackups|vimswap|vimundo)$',
-  \ 'file': '\v\.(exe|so|dll|doc)$',
+  \ 'file': '\v\.(exe|so|dll|doc|png)$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
 " }}}
