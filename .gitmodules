@@ -22,3 +22,9 @@
 [submodule "bundle/linediff.vim"]
 	path = bundle/linediff.vim
 	url = https://github.com/AndrewRadev/linediff.vim
+[submodule "bundle/DoxygenToolkit.vim"]
+	path = bundle/DoxygenToolkit.vim
+	url = https://github.com/vim-scripts/DoxygenToolkit.vim
+[submodule "bundle/Decho"]
+	path = bundle/Decho
+	url = https://github.com/vim-scripts/Decho.git
