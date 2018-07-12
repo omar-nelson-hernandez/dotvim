@@ -191,45 +191,6 @@ function! Tabs2Spaces()
 endfunction
 " }}}
 
-" Options for Indent guides (https://github.com/nathanaelkane/vim-indent-guides) {{{
-"-------------------------------------------------------------------------------
-
-" Levels of indentations
-"let g:indent_guides_indent_levels = 30
-
-"" Colors, disable automatic coloring
-"let g:indent_guides_auto_colors = 0
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
-
-"" Color change percentage
-"let g:indent_guides_color_change_percent = 10
-
-"" Indent guide size
-"let g:indent_guides_guide_size = 2
-
-"" Indent level start point
-"let g:indent_guides_start_level = 1
-
-"" Consider space as indentation
-"let g:indent_guides_space_guides = 1
-
-"" Consider tabs as indentation
-"let g:indent_guides_tab_guides = 1
-
-"" RegEx pattern to match soft-tabs
-"let g:indent_guides_soft_pattern = '\s'
-
-"" Enable in VIM starup
-let g:indent_guides_enable_on_vim_startup = 1
-
-"" Exclude filetypes from indent guides
-let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'vim', 'plsql']
-
-"" Enable the <leader>ig mapping
-"let g:indent_guides_default_mapping = 0
-" }}}
-
 " NetRW settings {{{
 " Slim list
 "   = 0: thin listing (one file per line)
