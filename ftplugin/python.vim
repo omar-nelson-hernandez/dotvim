@@ -1,0 +1,15 @@
+let b:ale_linters = ['flake8', 'mypy', 'prospector', 'pycodestyle', 'pyflakes', 'pylint', 'vulture']
+" let b:ale_linters = ['bandit', 'flake8', 'jedils', 'mypy', 'prospector', 'pycodestyle', 'pyflakes', 'pylama', 'pylint', 'pyls', 'pyre', 'pyright', 'vulture']
+" bandit = QT definition issues
+" +flake8 = whitespace
+" jedils = QT definition issues
+" +mypy = pretty useful, bit advanced, doesn't find QT's definitions
+" +prospector = seems to lag a bit, very useful, seems to scan whole project
+" +pycodestyle = found missing styling recommendations
+" +pyflakes = found unused imports
+" pylama = QT definition issue
+" +pylint = space after brackets, docstring, classmethods
+" pyls = QT definition issues
+" pyre = QT definition issues
+" pyright = QT definition issues
+" +vulture = unused variables and classes

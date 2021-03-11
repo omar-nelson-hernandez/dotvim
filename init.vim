@@ -39,7 +39,7 @@ set notimeout ttimeout ttimeoutlen=200                     " Timeout on keycodes
 set showmode                                               " Show the mode the editor is currently in
 set showmatch                                              " Show matching brackets.
 set incsearch                                              " Incremental search
-set clipboard=unnamed                                      " Use a global clipboard
+set clipboard=unnamedplus
 set encoding=utf-8
 scriptencoding utf-8
 set listchars=eol:$,trail:•,nbsp:~,tab:\|>                 " Define special characters
@@ -82,9 +82,10 @@ call plug#begin(plugPath)
   Plug 'tpope/vim-fugitive'
 " File opener
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
 " Markdown previewer
-  Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
-
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 call plug#end()
 " }}}
 
@@ -343,11 +344,6 @@ let g:ale_python_pylint_options = '--extension-pkg-whitelist=PyQt5,PyQt5.QtWidge
 
 " Airline settings - status bar {{{
 let g:airline#extensions#ale#enabled = 1
-" }}}
-
-" vim-instant-markdown settings - markdown preview {{{
-"let g:instant_markdown_allow_unsafe_content = 1
-"let g:instant_markdown_logfile = 'C:/users/omarn/Downloads/instant_markdown02.log'
 " }}}
 
 " markdown-preview.nvim {{{

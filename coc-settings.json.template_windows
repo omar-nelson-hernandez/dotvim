@@ -1,0 +1,7 @@
+{
+  "python.venvFolders": [".venv"],
+  "python.venvPath": "~\\coding\\",
+  "python.pythonPath": "~\\coding\\.venv\\Scripts\\python.exe",
+  "python.setInterpreter": "~\\coding\\.venv\\Scripts\\python.exe",
+  "diagnostic.displayByAle": true
+}
