@@ -57,11 +57,12 @@ set cc=80
 " }}}
 
 " Vim Plug {{{
+
 if has("win32")
-  let plugPath='~/vimfiles/plugged/'
+  let plugPath='~/vimfiles/plugged/nvim/'
 else
   if has("unix")
-    let plugPath='~/vim/plugged/'
+    let plugPath='~/.vim/plugged/nvim/'
   endif
 endif
 
@@ -71,8 +72,8 @@ call plug#begin(plugPath)
 " Linter
   Plug 'dense-analysis/ale'
 " Autocompletion
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'neoclide/coc-python'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'} " Requires nodejs
+  Plug 'fannheyward/coc-pyright' " Replaces neoclide/coc-python
   Plug 'neoclide/coc-json'
 " Status bar
   Plug 'vim-airline/vim-airline'
@@ -81,11 +82,10 @@ call plug#begin(plugPath)
 " Git integration
   Plug 'tpope/vim-fugitive'
 " File opener
-  Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Requires fzf
+  Plug 'junegunn/fzf.vim' " Requires fzf, bat, delta, silversearcher-ag, ripgrep, perl
 " Markdown previewer
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " Requires nodejs, yarn
 call plug#end()
 " }}}
 
@@ -221,7 +221,7 @@ endfunction
 
 " Start a journal entry
 function! StartJournalEntry()
-  let l:fileHeaderLine = search('---')
+  let l:fileHeaderLine = search('^---$')
   let l:journalHeader = ["## " . strftime("%Y-%m-%d %H:%M:%S")]
   call add(l:journalHeader, "")
   call add(l:journalHeader, "")
@@ -269,19 +269,6 @@ let g:netrw_winsize = 20
 let g:netrw_ignorenetrc = 1
 " let g:netrw_scp_cmd           = 'psftp'
 let g:netrw_sftp_cmd = 'psftp'
-" }}}
-
-" CtrlP plugin settings {{{
-let g:ctrlp_clear_cache_on_exit = 0                        " Don't allow the cache to be cleared when the sessions exits
-let g:ctrlp_show_hidden = 1                                " Scan for hidden files/folders
-" Modify scanning rules
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v([\/]\.(git|hg|svn|vimbackups|vimswap|vimundo|venv|mypy_cache)|__pycache__)$',
-  \ 'file': '\v\.(exe|so|dll|doc|png)$',
-  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-  \ }
-let g:ctrlp_root_markers = ['.ctrlp_root']
-let g:ctrlp_working_path_mode = 'r'
 " }}}
 
 " Text templates {{{
@@ -348,4 +335,10 @@ let g:airline#extensions#ale#enabled = 1
 
 " markdown-preview.nvim {{{
 let g:mkdp_auto_start = 1
+" }}}
+
+" fzf settings - file finder {{{
+nnoremap <C-f> :Files<CR>
+nnoremap <C-g> :GFiles<CR>
+nnoremap <C-s> :GFiles?<CR>
 " }}}
