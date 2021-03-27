@@ -1,7 +1,16 @@
+# For windows
 {
   "python.venvFolders": [".venv"],
   "python.venvPath": "~\\coding\\",
   "python.pythonPath": "~\\coding\\.venv\\Scripts\\python.exe",
   "python.setInterpreter": "~\\coding\\.venv\\Scripts\\python.exe",
+  "diagnostic.displayByAle": true
+}
+# For linux
+{
+  "python.venvFolders": [".venv"],
+  "python.venvPath": "~/coding/",
+  "python.pythonPath": "~/coding/.venv/bin/python",
+  "python.setInterpreter": "~/coding/.venv/bin/python",
   "diagnostic.displayByAle": true
 }
