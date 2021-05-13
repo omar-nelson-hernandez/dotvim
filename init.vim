@@ -59,10 +59,10 @@ set cc=80
 " Vim Plug {{{
 
 if has("win32")
-  let plugPath='~/vimfiles/plugged/nvim/'
+  let plugPath='~/vimfiles/plugged/'
 else
   if has("unix")
-    let plugPath='~/.vim/plugged/nvim/'
+    let plugPath='~/.config/nvim/plugged/'
   endif
 endif
 
@@ -78,7 +78,7 @@ call plug#begin(plugPath)
 " Status bar
   Plug 'vim-airline/vim-airline'
 " Theme
-  Plug 'tomasr/molokai'
+"Plug 'tomasr/molokai'
 " Git integration
   Plug 'tpope/vim-fugitive'
 " File opener
@@ -111,9 +111,8 @@ set splitright
 
 " Color scheme settings {{{
 syntax on
-"set t_Co=256
-"colorscheme tir_black
-colorscheme molokai
+set termguicolors
+colorscheme neon
 " }}}
 
 " Setup directories for backup, swap and undo {{{
