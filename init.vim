@@ -69,6 +69,8 @@ endif
 call plug#begin(plugPath)
   Plug 'tpope/vim-dispatch'
 
+" Syntax highlight
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Linter
   Plug 'dense-analysis/ale'
 " Autocompletion
@@ -77,8 +79,6 @@ call plug#begin(plugPath)
   Plug 'neoclide/coc-json'
 " Status bar
   Plug 'vim-airline/vim-airline'
-" Theme
-"Plug 'tomasr/molokai'
 " Git integration
   Plug 'tpope/vim-fugitive'
 " File opener
@@ -112,7 +112,7 @@ set splitright
 " Color scheme settings {{{
 syntax on
 set termguicolors
-colorscheme neon
+colorscheme cyber-outrun-neon
 " }}}
 
 " Setup directories for backup, swap and undo {{{
@@ -340,4 +340,18 @@ let g:mkdp_auto_start = 1
 nnoremap <C-f> :Files<CR>
 nnoremap <C-g> :GFiles<CR>
 nnoremap <C-s> :GFiles?<CR>
+" }}}
+
+" nvim-treesitter settings - highlight aid {{{
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = { enable = true },
+  incremental_selection = { enable = true },
+  indent = { enable = true },
+  text_objects = { enable = true },
+}
+EOF
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 " }}}
